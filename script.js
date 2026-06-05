@@ -1,17 +1,17 @@
-// Wholesome teddy-bear couple GIFs (Milk & Mocha / Bubu Dudu) — all verified to load
-// and hand-checked to be cuddly hugs only, never kissing.
-const hopefulGif = "https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-bears.gif";        // hopeful hug
-const happyGif   = "https://media.tenor.com/hjHT92fTnAAAAAAC/milk-and-mocha-bear-hug.gif"; // joyful hug + hearts
+// Wholesome teddy-bear couple GIFs (Milk & Mocha / Bubu Dudu), bundled in the repo
+// so they load instantly. All hand-checked to be cuddly hugs only, never kissing.
+const hopefulGif = "gifs/hopeful.gif";     // hopeful hug
+const happyGif   = "gifs/happy-hug.gif";   // joyful hug + hearts
 
 // Each "No" shows a sweeter cuddle, nudging toward yes.
 const noGifs = [
-  "https://media.tenor.com/DQAuOXAojZwAAAAC/hug.gif",                                 // panda hugs brown bear
-  "https://media.tenor.com/ZOUgG5_JeI0AAAAC/milk-and-mocha-milk-mocha.gif",           // tight hug
-  "https://media.tenor.com/sqMrmFmyejwAAAAC/hug.gif",                                 // big squeeze hug
-  "https://media.tenor.com/8ff-P081Di4AAAAC/bubu-dudu-bubu.gif",                      // lying together
-  "https://media.tenor.com/AcGBcQVmkXQAAAAC/i-need-you-in-my-life.gif",               // blanket cuddle
-  "https://media.tenor.com/wbntPv9hoXoAAAAC/cuddle-panda.gif",                        // couch cuddle
-  "https://media.tenor.com/nTy5FsZ6Zi4AAAAC/milk-and-mocha-milk-and-mocha-bear.gif"   // snuggled asleep
+  "gifs/no-1-panda-hug.gif",  // panda hugs brown bear
+  "gifs/no-2-tight-hug.gif",  // tight hug
+  "gifs/no-3-squeeze.gif",    // big squeeze hug
+  "gifs/no-4-lying.gif",      // lying together
+  "gifs/no-5-blanket.gif",    // blanket cuddle
+  "gifs/no-6-couch.gif",      // couch cuddle
+  "gifs/no-7-asleep.gif"      // snuggled asleep
 ];
 
 // Emoji used only if a GIF ever fails to load, so the page never looks broken.
@@ -43,16 +43,16 @@ let pickedIdea = null;
 // Each idea maps to a matching bear GIF. Ideas without a good match fall back
 // to a loving hug (handled in the click below). All hand-checked: cuddles, no kissing.
 const dateIdeas = [
-  { label: "Sunset picnic 🧺", text: "A sunset picnic it is — I'll pack your favourite snacks 🧺💕", gif: "https://media.tenor.com/KgydjX_HXD0AAAAC/credits-to-milkmochabear-milk-and-mocha.gif" },
-  { label: "Stargazing ✨", text: "Stargazing under the night sky... how dreamy ✨🌙", gif: "https://media.tenor.com/NAlFEAMHqp4AAAAC/love-cute.gif" },
-  { label: "Movie night 🎬", text: "Cozy movie night — you pick, I bring the popcorn 🎬🍿", gif: "https://media.tenor.com/KCGx5y8D11EAAAAC/milk-and-mocha-waching.gif" },
-  { label: "Coffee date ☕", text: "Coffee date! Long talks and warm cups ☕💗", gif: "https://media.tenor.com/OvDaB7346xIAAAAC/milk-mocha.gif" },
-  { label: "Beach walk 🌊", text: "A beach walk with our feet in the sand 🌊👣", gif: "https://media.tenor.com/nyCt3hBxmO4AAAAC/bubu-dudu-beach-party.gif" },
-  { label: "Cook together 🍝", text: "Let's cook together — chaos and laughter guaranteed 🍝😄", gif: "https://media.tenor.com/vQVwRv7U52sAAAAC/dudu-bubu-dudu-cooking.gif" },
+  { label: "Sunset picnic 🧺", text: "A sunset picnic it is — I'll pack your favourite snacks 🧺💕", gif: "gifs/idea-picnic.gif" },
+  { label: "Stargazing ✨", text: "Stargazing under the night sky... how dreamy ✨🌙", gif: "gifs/idea-stargazing.gif" },
+  { label: "Movie night 🎬", text: "Cozy movie night — you pick, I bring the popcorn 🎬🍿", gif: "gifs/idea-movie.gif" },
+  { label: "Coffee date ☕", text: "Coffee date! Long talks and warm cups ☕💗", gif: "gifs/idea-coffee.gif" },
+  { label: "Beach walk 🌊", text: "A beach walk with our feet in the sand 🌊👣", gif: "gifs/idea-beach.gif" },
+  { label: "Cook together 🍝", text: "Let's cook together — chaos and laughter guaranteed 🍝😄", gif: "gifs/idea-cook.gif" },
   { label: "Art & painting 🎨", text: "An art date — let's make a mess and call it masterpieces 🎨" },
-  { label: "Ice cream 🍦", text: "Ice cream stroll — one scoop for every laugh 🍦💞", gif: "https://media.tenor.com/Bifz_yyzJIUAAAAC/milk-mocha-bear-milk-and-mocha.gif" },
-  { label: "Bookstore browse 📚", text: "Wandering a cozy bookstore together 📚🤍", gif: "https://media.tenor.com/dmbVED27EaAAAAAC/milk-mocha.gif" },
-  { label: "Dancing 💃", text: "Dancing the night away, just you and me 💃🕺", gif: "https://media.tenor.com/G63l14jIfggAAAAC/dance.gif" }
+  { label: "Ice cream 🍦", text: "Ice cream stroll — one scoop for every laugh 🍦💞", gif: "gifs/idea-icecream.gif" },
+  { label: "Bookstore browse 📚", text: "Wandering a cozy bookstore together 📚🤍", gif: "gifs/idea-book.gif" },
+  { label: "Dancing 💃", text: "Dancing the night away, just you and me 💃🕺", gif: "gifs/idea-dance.gif" }
 ];
 
 const ideasChips = document.getElementById("ideasChips");
