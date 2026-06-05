@@ -1,8 +1,20 @@
-// Cute hugging-bears GIF (verified to load). Used for the hopeful + happy states.
-const happyGif = "https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-bears.gif";
+// Wholesome teddy-bear couple GIFs (Milk & Mocha / Bubu Dudu) — all verified to load
+// and hand-checked to be cuddly hugs only, never kissing.
+const hopefulGif = "https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-bears.gif";        // hopeful hug
+const happyGif   = "https://media.tenor.com/hjHT92fTnAAAAAAC/milk-and-mocha-bear-hug.gif"; // joyful hug + hearts
 
-// Safe emoji reactions for the sad "No" states — these always render, no hotlink risk.
-const sadEmojis = ["🥺", "😢", "🥹", "😭", "😭"];
+// Each "No" shows a sweeter cuddle, nudging toward yes.
+const noGifs = [
+  "https://media.tenor.com/DQAuOXAojZwAAAAC/hug.gif",                                 // panda hugs brown bear
+  "https://media.tenor.com/ZOUgG5_JeI0AAAAC/milk-and-mocha-milk-mocha.gif",           // tight hug
+  "https://media.tenor.com/sqMrmFmyejwAAAAC/hug.gif",                                 // big squeeze hug
+  "https://media.tenor.com/8ff-P081Di4AAAAC/bubu-dudu-bubu.gif",                      // lying together
+  "https://media.tenor.com/AcGBcQVmkXQAAAAC/i-need-you-in-my-life.gif",               // blanket cuddle
+  "https://media.tenor.com/wbntPv9hoXoAAAAC/cuddle-panda.gif",                        // couch cuddle
+  "https://media.tenor.com/nTy5FsZ6Zi4AAAAC/milk-and-mocha-milk-and-mocha-bear.gif"   // snuggled asleep
+];
+
+// Emoji used only if a GIF ever fails to load, so the page never looks broken.
 const happyEmoji = "🧸💖";
 
 const noMessages = [
@@ -79,33 +91,27 @@ function makeEmojiBox(emoji) {
   return div;
 }
 
-function makeGifImg() {
+function makeGifImg(src) {
   const img = document.createElement("img");
   img.className = "gif";
   img.id = "gif";
-  img.alt = "cute bears";
-  img.src = happyGif;
+  img.alt = "cute cuddling bears";
+  img.src = src;
   // If the GIF ever fails to load, fall back to a happy emoji.
   img.addEventListener("error", () => img.replaceWith(makeEmojiBox(happyEmoji)));
   return img;
 }
 
-// Swap the #gif element between the bears GIF and an emoji reaction.
-function showGif() {
+// Show a given bear GIF in the #gif slot (handles the emoji-fallback case too).
+function setGifSrc(src) {
   const el = document.getElementById("gif");
-  if (el.tagName === "IMG") el.src = happyGif;
-  else el.replaceWith(makeGifImg());
-}
-
-function showEmoji(emoji) {
-  const el = document.getElementById("gif");
-  if (el.tagName === "DIV") el.textContent = emoji;
-  else el.replaceWith(makeEmojiBox(emoji));
+  if (el.tagName === "IMG") el.src = src;
+  else el.replaceWith(makeGifImg(src));
 }
 
 // Start hopeful with the cute bears GIF (fall back to emoji if it can't load).
 gifEl.addEventListener("error", () => gifEl.replaceWith(makeEmojiBox("🐻💕")));
-gifEl.src = happyGif;
+setGifSrc(hopefulGif);
 
 noBtn.addEventListener("click", () => {
   noCount++;
@@ -114,10 +120,10 @@ noBtn.addEventListener("click", () => {
   const scale = 1 + noCount * 0.25;
   yesBtn.style.transform = `scale(${scale})`;
 
-  // Update the No button's text and the sad reaction.
+  // Update the No button's text and show a sweeter cuddle GIF.
   const msg = noMessages[Math.min(noCount, noMessages.length - 1)];
   noBtn.textContent = msg;
-  showEmoji(sadEmojis[Math.min(noCount - 1, sadEmojis.length - 1)]);
+  setGifSrc(noGifs[Math.min(noCount - 1, noGifs.length - 1)]);
 
   // After enough refusals, make "No" hard to pursue.
   if (noCount >= 5) {
@@ -139,7 +145,7 @@ function moveNoButton() {
 
 yesBtn.addEventListener("click", () => {
   questionEl.textContent = "Yay!! It's a date! 💖🎉";
-  showGif();
+  setGifSrc(happyGif);
   pickedIdeaEl.textContent = pickedIdea
     ? pickedIdea.text
     : "Can't wait to plan every little detail with you 💞";
