@@ -1,0 +1,114 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: linear-gradient(135deg, #ffd6e8 0%, #ffafcc 50%, #ff8fab 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+  padding: 20px;
+  overflow-x: hidden;
+  color: #6a1b3d;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  gap: 28px;
+}
+
+.gif {
+  width: 240px;
+  max-width: 80vw;
+  height: auto;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(106, 27, 61, 0.25);
+  background: rgba(255, 255, 255, 0.4);
+}
+
+h1 {
+  font-size: clamp(1.6rem, 5vw, 2.6rem);
+  font-weight: 800;
+  max-width: 700px;
+  line-height: 1.3;
+  text-shadow: 0 2px 6px rgba(255, 255, 255, 0.5);
+}
+
+.buttons {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  border-radius: 999px;
+  font-weight: 700;
+  padding: 14px 36px;
+  font-size: 1.15rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.yes-btn {
+  background: #ff4d6d;
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(255, 77, 109, 0.45);
+}
+
+.yes-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 12px 26px rgba(255, 77, 109, 0.55);
+}
+
+.no-btn {
+  background: #fff;
+  color: #ff4d6d;
+  box-shadow: 0 8px 20px rgba(106, 27, 61, 0.15);
+}
+
+.no-btn:hover {
+  transform: translateY(-2px);
+}
+
+.footer {
+  padding: 18px 0 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #8a2748;
+  opacity: 0.85;
+}
+
+/* Confetti hearts on success */
+.heart {
+  position: fixed;
+  top: -40px;
+  font-size: 1.6rem;
+  animation: fall linear forwards;
+  pointer-events: none;
+  z-index: 50;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
