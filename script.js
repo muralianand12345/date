@@ -1,17 +1,17 @@
 // Wholesome teddy-bear couple GIFs (Milk & Mocha / Bubu Dudu), bundled in the repo
 // so they load instantly. All hand-checked to be cuddly hugs only, never kissing.
-const hopefulGif = "gifs/hopeful.gif";     // hopeful hug
-const happyGif   = "gifs/happy-hug.gif";   // joyful hug + hearts
+const hopefulGif = "gifs/hopeful.webp";     // hopeful hug
+const happyGif   = "gifs/happy-hug.webp";   // joyful hug + hearts
 
 // Each "No" shows a sweeter cuddle, nudging toward yes.
 const noGifs = [
-  "gifs/no-1-panda-hug.gif",  // panda hugs brown bear
-  "gifs/no-2-tight-hug.gif",  // tight hug
-  "gifs/no-3-squeeze.gif",    // big squeeze hug
-  "gifs/no-4-lying.gif",      // lying together
-  "gifs/no-5-blanket.gif",    // blanket cuddle
-  "gifs/no-6-couch.gif",      // couch cuddle
-  "gifs/no-7-asleep.gif"      // snuggled asleep
+  "gifs/no-1-panda-hug.webp",  // panda hugs brown bear
+  "gifs/no-2-tight-hug.webp",  // tight hug
+  "gifs/no-3-squeeze.webp",    // big squeeze hug
+  "gifs/no-4-lying.webp",      // lying together
+  "gifs/no-5-blanket.webp",    // blanket cuddle
+  "gifs/no-6-couch.webp",      // couch cuddle
+  "gifs/no-7-asleep.webp"      // snuggled asleep
 ];
 
 // Emoji used only if a GIF ever fails to load, so the page never looks broken.
@@ -43,16 +43,16 @@ let pickedIdea = null;
 // Each idea maps to a matching bear GIF. Ideas without a good match fall back
 // to a loving hug (handled in the click below). All hand-checked: cuddles, no kissing.
 const dateIdeas = [
-  { label: "Sunset picnic 🧺", text: "A sunset picnic it is — I'll pack your favourite snacks 🧺💕", gif: "gifs/idea-picnic.gif" },
-  { label: "Stargazing ✨", text: "Stargazing under the night sky... how dreamy ✨🌙", gif: "gifs/idea-stargazing.gif" },
-  { label: "Movie night 🎬", text: "Cozy movie night — you pick, I bring the popcorn 🎬🍿", gif: "gifs/idea-movie.gif" },
-  { label: "Coffee date ☕", text: "Coffee date! Long talks and warm cups ☕💗", gif: "gifs/idea-coffee.gif" },
-  { label: "Beach walk 🌊", text: "A beach walk with our feet in the sand 🌊👣", gif: "gifs/idea-beach.gif" },
-  { label: "Cook together 🍝", text: "Let's cook together — chaos and laughter guaranteed 🍝😄", gif: "gifs/idea-cook.gif" },
+  { label: "Sunset picnic 🧺", text: "A sunset picnic it is — I'll pack your favourite snacks 🧺💕", gif: "gifs/idea-picnic.webp" },
+  { label: "Stargazing ✨", text: "Stargazing under the night sky... how dreamy ✨🌙", gif: "gifs/idea-stargazing.webp" },
+  { label: "Movie night 🎬", text: "Cozy movie night — you pick, I bring the popcorn 🎬🍿", gif: "gifs/idea-movie.webp" },
+  { label: "Coffee date ☕", text: "Coffee date! Long talks and warm cups ☕💗", gif: "gifs/idea-coffee.webp" },
+  { label: "Beach walk 🌊", text: "A beach walk with our feet in the sand 🌊👣", gif: "gifs/idea-beach.webp" },
+  { label: "Cook together 🍝", text: "Let's cook together — chaos and laughter guaranteed 🍝😄", gif: "gifs/idea-cook.webp" },
   { label: "Art & painting 🎨", text: "An art date — let's make a mess and call it masterpieces 🎨" },
-  { label: "Ice cream 🍦", text: "Ice cream stroll — one scoop for every laugh 🍦💞", gif: "gifs/idea-icecream.gif" },
-  { label: "Bookstore browse 📚", text: "Wandering a cozy bookstore together 📚🤍", gif: "gifs/idea-book.gif" },
-  { label: "Dancing 💃", text: "Dancing the night away, just you and me 💃🕺", gif: "gifs/idea-dance.gif" }
+  { label: "Ice cream 🍦", text: "Ice cream stroll — one scoop for every laugh 🍦💞", gif: "gifs/idea-icecream.webp" },
+  { label: "Bookstore browse 📚", text: "Wandering a cozy bookstore together 📚🤍", gif: "gifs/idea-book.webp" },
+  { label: "Dancing 💃", text: "Dancing the night away, just you and me 💃🕺", gif: "gifs/idea-dance.webp" }
 ];
 
 const ideasChips = document.getElementById("ideasChips");
@@ -72,11 +72,14 @@ dateIdeas.forEach((idea) => {
   ideasChips.appendChild(chip);
 });
 
-// ---- Drifting background hearts ----
+// ---- Drifting background hearts (fewer on phones; off if reduced-motion) ----
 (function spawnBackgroundHearts() {
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce) return;
   const container = document.getElementById("bgHearts");
   const symbols = ["💖", "💕", "🤍", "🌸", "✨", "💗"];
-  for (let i = 0; i < 22; i++) {
+  const count = window.innerWidth < 600 ? 10 : 22;
+  for (let i = 0; i < count; i++) {
     const s = document.createElement("span");
     s.textContent = symbols[Math.floor(Math.random() * symbols.length)];
     s.style.left = Math.random() * 100 + "vw";
@@ -116,6 +119,13 @@ function setGifSrc(src) {
 // Start hopeful with the cute bears GIF (fall back to emoji if it can't load).
 gifEl.addEventListener("error", () => gifEl.replaceWith(makeEmojiBox("🐻💕")));
 setGifSrc(hopefulGif);
+
+// Quietly warm the cache after first paint so chip clicks and the Yes hug
+// appear instantly (the files are small WebP, so this is cheap).
+window.addEventListener("load", () => {
+  const rest = [happyGif, ...noGifs, ...dateIdeas.map((d) => d.gif).filter(Boolean)];
+  rest.forEach((src) => { const i = new Image(); i.src = src; });
+});
 
 noBtn.addEventListener("click", () => {
   noCount++;
