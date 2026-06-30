@@ -242,7 +242,6 @@ function drawEvidence() {
 
   ctx.fillStyle = "#8a2748";
   ctx.font = "600 30px 'Segoe UI', sans-serif";
-  ctx.fillText("Made with ❤️ by Sulaiman", W / 2, 980);
 
   // Trigger download.
   canvas.toBlob((blob) => {

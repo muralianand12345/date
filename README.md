@@ -30,6 +30,4 @@ vercel        # follow prompts, then `vercel --prod`
 2. Go to https://vercel.com/new and import the repo.
 3. Framework preset: **Other** (no build command, output is the repo root).
 4. Click **Deploy**.
-
----
-Made with ❤️ by Sulaiman
+`
